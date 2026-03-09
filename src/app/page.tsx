@@ -19,11 +19,7 @@ export default async function Home() {
             <a href={"/latest"} target={"_blank"} rel={"noopener noreferrer"}>
               <Button>直近の配信を見に行く</Button>
             </a>
-            <a
-              href={"https://youtube.com/@maamokun"}
-              target={"_blank"}
-              rel={"noopener noreferrer"}
-            >
+            <a href={"https://youtube.com/@maamokun"} target={"_blank"} rel={"noopener noreferrer"}>
               <Button>チャンネルへ</Button>
             </a>
           </div>

@@ -53,25 +53,33 @@ function mergeProps<T extends HTMLElement>(
   return merged;
 }
 
+const motionCache = new Map<React.ElementType, React.ElementType>();
+
+function getMotionComponent(type: React.ElementType): React.ElementType {
+  if (motionCache.has(type)) return motionCache.get(type)!;
+  const Component = motion.create(type);
+  motionCache.set(type, Component);
+  return Component;
+}
+
 function Slot<T extends HTMLElement = HTMLElement>({ children, ref, ...props }: SlotProps<T>) {
+  if (!React.isValidElement(children)) return null;
+
   const isAlreadyMotion =
     typeof children.type === "object" && children.type !== null && isMotionComponent(children.type);
 
-  const Base = React.useMemo(
-    () =>
-      isAlreadyMotion
-        ? (children.type as React.ElementType)
-        : motion.create(children.type as React.ElementType),
-    [isAlreadyMotion, children.type],
-  );
-
-  if (!React.isValidElement(children)) return null;
+  const Base = isAlreadyMotion
+    ? (children.type as React.ElementType)
+    : getMotionComponent(children.type as React.ElementType);
 
   const { ref: childRef, ...childProps } = children.props as AnyProps;
 
   const mergedProps = mergeProps(childProps, props);
 
-  return <Base {...mergedProps} ref={mergeRefs(childRef as React.Ref<T>, ref)} />;
+  const mergedRef = mergeRefs(childRef as React.Ref<T>, ref);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return React.createElement(Base as any, { ...mergedProps, ref: mergedRef });
 }
 
 export { Slot, type SlotProps, type WithAsChild, type DOMMotionProps, type AnyProps };
