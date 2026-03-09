@@ -36,7 +36,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
   ];
 
   const navigation = [
-    { name: "プロフィール", href: "/profile" },
+    { name: "コンセプト", href: "/concept" },
     { name: "メンバー紹介", href: "/members" },
   ];
 

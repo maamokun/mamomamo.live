@@ -3,6 +3,7 @@ import { latestLive } from "@/lib/latest-live";
 import { TPoseRotate } from "@/components/vrm/tposeRotate";
 import LiveStatus from "@/components/liveStatus";
 import { Button } from "@/components/animate-ui/components/buttons/button";
+import CurvedLoop from "@/components/curvedLoop";
 
 export default async function Home() {
   const latest = await latestLive("@maamokun");
@@ -25,6 +26,14 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      <CurvedLoop
+        marqueeText={"まもまも！"}
+        speed={3}
+        curveAmount={180}
+        direction="right"
+        interactive={true}
+        className=""
+      />
     </>
   );
 }
