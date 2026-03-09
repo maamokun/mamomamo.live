@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import logo from "@/assets/mamomamoLogo.png";
 import { motion } from "motion/react";
 import { logoPath } from "@/constants/logoPath";
@@ -13,13 +14,18 @@ const ROTATION_START = COUNTER_ROTATION_START + COUNTER_ROTATION_DURATION + 0.2;
 const ROTATION_DURATION = 1.0;
 
 export default function AnimatedIntro({ onComplete }: { onComplete?: () => void }) {
+  const [done, setDone] = useState(false);
+
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background${done ? " pointer-events-none" : ""}`}
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ delay: ROTATION_START, duration: ROTATION_DURATION }}
-      onAnimationComplete={onComplete}
+      onAnimationComplete={() => {
+        setDone(true);
+        onComplete?.();
+      }}
     >
       <motion.div
         className="relative flex items-center justify-center"
