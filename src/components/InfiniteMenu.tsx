@@ -1165,12 +1165,15 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
           select-none
           absolute
           font-black
-          text-[4rem]
-          left-[1.6em]
-          top-1/2
-          transform
-          translate-x-[20%]
-          -translate-y-1/2
+          text-[2.5rem]
+          left-6
+          top-18
+          md:text-[4rem]
+          md:left-[1.6em]
+          md:top-1/2
+          md:transform
+          md:translate-x-[20%]
+          md:-translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           ${
@@ -1187,16 +1190,21 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
             className={`
           select-none
           absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[1%]
+          max-w-md
+          text-[1.2rem]
+          left-6
+          top-32
+          md:max-w-[10ch]
+          md:text-[1.5rem]
+          md:top-1/2
+          md:left-auto
+          md:right-[1%]
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           ${
             isMoving
-              ? "opacity-0 pointer-events-none duration-100 translate-x-[-60%] -translate-y-1/2"
-              : "opacity-100 pointer-events-auto duration-500 translate-x-[-90%] -translate-y-1/2"
+              ? "opacity-0 pointer-events-none duration-100 md:translate-x-[-60%] md:-translate-y-1/2"
+              : "opacity-100 pointer-events-auto duration-500 md:translate-x-[-90%] md:-translate-y-1/2"
           }
         `}
           >
