@@ -36,10 +36,34 @@ export function jsonChannelVideos(html: string): ChannelVideo[] {
       const renderer = item.richItemRenderer?.content.videoRenderer;
       if (!renderer) continue;
 
-      const isLive =
-        renderer.badges?.some((badge: any) =>
-          badge.metadataBadgeRenderer?.label?.toLowerCase()?.includes("live"),
-        ) || false;
+      // Check multiple indicators for live status
+      const badgeIsLive =
+        renderer.badges?.some((badge: any) => {
+          const label = badge.metadataBadgeRenderer?.label?.toLowerCase() || "";
+          const style = badge.metadataBadgeRenderer?.style || "";
+          return (
+            label.includes("live") ||
+            label.includes("streaming") ||
+            label.includes("配信中") ||
+            style.includes("LIVE")
+          );
+        }) || false;
+
+      // Check thumbnailOverlays for live indicator
+      const overlayIsLive =
+        renderer.thumbnailOverlays?.some((overlay: any) => {
+          const style = overlay.thumbnailOverlayTimeStatusRenderer?.style || "";
+          const text = overlay.thumbnailOverlayTimeStatusRenderer?.text?.simpleText || "";
+          return style === "LIVE" || text.toLowerCase().includes("live");
+        }) || false;
+
+      // Check viewCountText for "watching" pattern (live) vs "views" (VOD)
+      const viewCountIsLive =
+        renderer.viewCountText?.simpleText?.toLowerCase()?.includes("watching") ||
+        renderer.viewCountText?.runs?.[0]?.text?.toLowerCase()?.includes("watching") ||
+        false;
+
+      const isLive = badgeIsLive || overlayIsLive || viewCountIsLive;
 
       const video: ChannelVideo = {
         id: renderer.videoId,

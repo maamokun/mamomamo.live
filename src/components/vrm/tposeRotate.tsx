@@ -75,7 +75,7 @@ export function TPoseRotate() {
   }, []);
 
   return (
-    <div className="overflow-hidden w-180 h-150 relative">
+    <div className="overflow-hidden w-7h h-60 md:w-150 md:h-120 relative">
       <div className="flex flex-col justify-center items-center w-full h-full">
         {!isLoaded ? (
           <div className="flex items-center justify-center">

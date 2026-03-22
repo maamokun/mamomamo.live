@@ -8,7 +8,7 @@ import CustomCursor from "@/components/mikanCursor";
 import Logo from "@/assets/mamomamoLogo.png";
 
 export default function PagesLayout({ children }: { children: ReactNode }) {
-  Swetrix.init("1rtCvreKr4w8", {
+  Swetrix.init("fcwngXuAjXbL", {
     apiURL: "https://analytics.mikandev.com/backend/v1/log",
   });
 
