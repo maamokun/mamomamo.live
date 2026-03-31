@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [{ "source": "/channel", "destination": "https://youtube.com/@maamokun" }]
+}
