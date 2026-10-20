@@ -10,15 +10,6 @@ const keifont = localFont({
 export const metadata: Metadata = {
   title: "まもまもうぇぶ",
   description: "柑橘系VTuberまもまもの公式カスサイト",
-  openGraph: {
-    images: [
-      {
-        url: "https://mamomamo.live/img/og.png",
-        width: 1920,
-        height: 1080,
-      },
-    ],
-  },
 };
 
 export default function RootLayout({
